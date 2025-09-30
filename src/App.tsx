@@ -1,15 +1,19 @@
+import type React from "react"
+import { UseCard } from "./components/UseCard"
+import type { User } from './types/types'
 
 
-function App() {
-
+export default function App() {
+  const user: User = {
+    name: 'Juan Valencia',
+    email: 'juanvalencia@gmail.com',
+    role: 'admin'
+  }
 
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">Hola Mundo</h1>
-      <p className="">Esto es una prueba de react</p>
-      
-    </>
+    <div className="p-6 flex justify-center">
+      <UseCard user={user}/>
+    </div>
   )
 }
 
-export default App

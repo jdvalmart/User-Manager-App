@@ -1,73 +1,164 @@
-# React + TypeScript + Vite
+# 📌 User Manager App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una aplicación de gestión de usuarios construida con **React**, **TypeScript** y **Tailwind CSS**.
+El proyecto está diseñado como ejercicio práctico para consolidar conceptos fundamentales de React, incluyendo estados locales y globales, hooks personalizados, manejo de formularios, fetch de datos y optimización de componentes.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Funcionalidades principales
 
-## React Compiler
+* **Dashboard de usuarios**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+  * Obtención de lista de usuarios desde una API pública (`https://jsonplaceholder.typicode.com/users`).
+  * Estados de carga y error.
+  * Optimización del `fetch` con `useEffect`.
 
-## Expanding the ESLint configuration
+* **Agregar usuario**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+  * Formulario interactivo con campos de **nombre, correo y rol**.
+  * Validaciones básicas.
+  * Mostrar/ocultar el formulario con un toggle.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+* **Contador de usuarios**
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+  * Estado global con **Context API + useReducer**.
+  * Hook personalizado `useCounter`.
+  * Optimización con `React.memo`.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+* **Editar y eliminar usuario**
+
+  * Botones de acción en cada tarjeta/lista.
+  * Actualización global del estado en toda la aplicación.
+
+* **Toggle de vista**
+
+  * Cambiar entre **modo lista** y **modo tarjetas (grid)**.
+
+* **Tipado con TypeScript**
+
+  * Props, estados, reducers y contextos fuertemente tipados.
+  * Componentes reutilizables y seguros.
+
+* **Estilizado con Tailwind CSS**
+
+  * Diseño **responsive y moderno**.
+  * Botones, formularios y tarjetas estilizadas.
+
+---
+
+## 📂 Estructura del proyecto
+
+```
+src/
+│
+├─ components/
+│   ├─ UserList.tsx          // Lista de usuarios
+│   ├─ UserCard.tsx          // Tarjeta individual de usuario
+│   ├─ UserForm.tsx          // Formulario de agregar/editar usuario
+│   ├─ Counter.tsx           // Contador reutilizable
+│   └─ ToggleButton.tsx      // Botón para cambiar vista
+│
+├─ context/
+│   └─ UserContext.tsx       // Context API + useReducer
+│
+├─ hooks/
+│   └─ useCounter.ts         // Hook personalizado
+│
+├─ types/
+│   └─ types.ts              // Tipos para User, Props, etc.
+│
+├─ pages/
+│   └─ Dashboard.tsx         // Página principal
+│
+├─ App.tsx
+└─ index.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🧩 Componentes y conceptos aplicados
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+| Componente       | Conceptos aplicados                                                          |
+| ---------------- | ---------------------------------------------------------------------------- |
+| **UserList**     | `fetch`, `useEffect`, manejo de errores, renderizado de lista                |
+| **UserCard**     | Props tipadas, optimización con `React.memo`                                 |
+| **UserForm**     | `useState`, manejo de inputs, validaciones, toggle del formulario            |
+| **Counter**      | `useReducer`, `Context API`, hook personalizado (`useCounter`), `React.memo` |
+| **ToggleButton** | `useState`, eventos, cambio de vista (grid/list)                             |
+| **App**          | Context Provider global, estructura de la aplicación                         |
+| **useCounter**   | Hook personalizado reutilizable                                              |
+| **TypeScript**   | Tipado de props, estados, funciones, reducers y contextos                    |
+
+---
+
+## 🔄 Flujo de la aplicación
+
+1. `App` envuelve todo con `UserProvider`.
+2. `Dashboard` carga la lista de usuarios desde la API con `useEffect`.
+3. `UserList` muestra usuarios usando `UserCard`.
+4. `UserForm` permite agregar/editar usuarios.
+5. `Counter` muestra y controla el número global de usuarios.
+6. `ToggleButton` alterna entre vista **lista** y **grid**.
+7. Los cambios se reflejan globalmente gracias a **Context API + useReducer**.
+
+---
+
+## 🎯 Extras de aprendizaje
+
+* **Optimización** con `React.memo` y dependencias correctas en `useEffect`.
+* **Manejo de estados complejos** con `useReducer`.
+* **Hooks personalizados** para reutilización.
+* **Tipado avanzado en TypeScript** para seguridad y escalabilidad.
+* **Estilos modernos con Tailwind CSS**, responsive y claros.
+
+---
+
+## ▶️ Instalación y ejecución
+
+1. Clona este repositorio:
+
+   ```bash
+   git clone https://github.com/tuusuario/user-manager-app.git
+   cd user-manager-app
+   ```
+
+2. Instala dependencias:
+
+   ```bash
+   npm install
+   ```
+
+3. Ejecuta en modo desarrollo:
+
+   ```bash
+   npm start
+   ```
+
+4. Abre en tu navegador:
+
+   ```
+   http://localhost:3000
+   ```
+
+---
+
+## 📚 Tecnologías utilizadas
+
+* [React 18](https://react.dev/)
+* [TypeScript](https://www.typescriptlang.org/)
+* [Tailwind CSS](https://tailwindcss.com/)
+* Context API + useReducer
+* Hooks personalizados (`useCounter`)
+
+---
+
+## 📌 Próximos pasos
+
+* Implementar **modo oscuro/claro**.
+* Conectar con una API real en lugar de JSONPlaceholder.
+* Añadir **paginación** en la lista de usuarios.
+* Mejorar validaciones del formulario con **React Hook Form** o **Zod**.
+
+---
+
+💡 Este proyecto está pensado como **guía práctica de aprendizaje** para React + TypeScript + Tailwind.

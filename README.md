@@ -150,15 +150,4 @@ src/
 * Context API + useReducer
 * Hooks personalizados (`useCounter`)
 
----
 
-## 📌 Próximos pasos
-
-* Implementar **modo oscuro/claro**.
-* Conectar con una API real en lugar de JSONPlaceholder.
-* Añadir **paginación** en la lista de usuarios.
-* Mejorar validaciones del formulario con **React Hook Form** o **Zod**.
-
----
-
-💡 Este proyecto está pensado como **guía práctica de aprendizaje** para React + TypeScript + Tailwind.
